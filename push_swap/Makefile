@@ -7,7 +7,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SOURCES_DIR = ./sources/
-SOURCES_LIST = main.c utils.c error_validation.c stack_utils.c stack_do_a.c stack_do_b.c stack_do_ab.c
+SOURCES_LIST = main.c utils.c error_validation.c stack_utils.c stack_do_a.c stack_do_b.c stack_do_ab.c\
+			   stack_sort.c 
 SOURCES = $(addprefix $(SOURCES_DIR), $(SOURCES_LIST))
 
 OBJECTS_DIR = ./objects/
