@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 19:34:08 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/11 01:26:19 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/11 16:13:16 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef enum ids
 typedef struct s_stack
 {
 	int				data;
+	int				score;
 	struct s_stack	*next;
 }					t_stack;
 
@@ -57,17 +58,19 @@ typedef struct s_params
 	int		min;
 	int		max;
 	int		med;
+	int		size;
 }			t_params;
 
 // utils
 int		split_count(char **arr);
 void	free_array(char **arr);
 void	fill_array(int *arr, int size, t_stack **stack);
-void	free_stack(t_stack **stack);
+void	free_stack(t_stack *stack);
 
 //stack utils 
 t_bool 	CheckIfValid(int argc, char **argv);
-t_stack	*StackInit(int argc,char **argv);
+t_stack	*StackInit(int argc, char **argv);
+t_stack	*bStackInit(t_stack *a, t_params *a_params);
 int		CountStackElems(t_stack **stack);
 t_bool	CheckIfSorted(t_stack **stack);
 
@@ -89,11 +92,16 @@ void	do_rrr(t_stack **a_stack, t_stack **b_stack, t_bool status);
 //sort
 void	doSort(t_stack **a_stack);
 void	doSmallSort(t_stack **a);
-void	doFinalSort(t_stack **a_stack);
+void	doMainSort(t_stack *a, t_params *a_params);
+void	doFinalSort(t_stack **a_stack, t_params *a_params);
 
-t_bool	doParamsCalculation(t_stack **stack, t_params *params, int size);
+t_bool	doParamsCalculation(t_stack **stack, t_params *params);
+void	doScoreCalculation_b(t_stack **b);
 
 //quick sort
 void	doQuickSort(int *arr, int low, int high);
+
+//stuff to delete
+void	print_stack2(t_stack *stack);
 
 #endif

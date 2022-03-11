@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:19:12 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/11 01:29:42 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/11 13:52:49 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_stack2(t_stack *stack)
 	t_stack	*tmp;
 
 	tmp = stack;
-	printf("----------\n");
+	// printf("----------\n");
 	while (tmp)
 	{
 		printf("%d ", tmp->data);
@@ -83,7 +83,9 @@ int	main(int argc, char **argv)
 		a = StackInit(argc - 1, argv + 1);
 		doSort(&a);
 		print_stack2(a);
-		free_stack(&a);
+		free_stack(a);
+		if (argv[0][0] == 'p')
+			free_array(argv);
 
 		// t_stack	*b;
 		// b = NULL;

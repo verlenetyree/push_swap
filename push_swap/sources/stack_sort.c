@@ -6,19 +6,22 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 17:50:35 by admin             #+#    #+#             */
-/*   Updated: 2022/03/11 01:08:34 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/11 16:50:42 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 
-t_bool	doParamsCalculation(t_stack **stack, t_params *params, int size)
+t_bool	doParamsCalculation(t_stack **stack, t_params *params)
 {
 	int		i;
+	int		size;
 	int		*arr;
 	
 	i = 0;
+	params->size = CountStackElems(stack);
+	size = params->size;
 	arr = (int *)malloc(sizeof(int) * size + 1);
 	if (!arr)
 		return(false);
@@ -31,30 +34,31 @@ t_bool	doParamsCalculation(t_stack **stack, t_params *params, int size)
 	return (true);
 }
 
-void	doFinalSort(t_stack **a_stack)
+void	doFinalSort(t_stack **a_stack, t_params *a_params)
 {
 	int			i;
 	int			size;
-	t_params	a_params;
 	t_stack		*tmp;
-	
-	size = CountStackElems(a_stack);
-	if(!doParamsCalculation(a_stack, &a_params, size)) // попробовать посчитать ещё раньше
-		return ;
+
+	size = a_params->size;
+	// if(!doParamsCalculation(a_stack, a_params)) // попробовать посчитать ещё раньше
+	// 	return ;
 	tmp = *a_stack;
 	i = 0;
-	while(tmp->data != a_params.min)
+	while(tmp->data != a_params->min)
 	{
 		tmp = tmp->next;
 		i++;
 	}
 	if (i > size / 2)
-		while ((*a_stack)->data != a_params.min)
+		while ((*a_stack)->data != a_params->min)
 			do_rra(a_stack, true);
 	else
-		while ((*a_stack)->data != a_params.min)
+		while ((*a_stack)->data != a_params->min)
 			do_ra(a_stack, true);
 }
+
+//можно сделать сортировку по шести элементам с разбивкой на два стека по три элемента
 
 void	doSmallSort(t_stack **a_stack)
 {
@@ -73,12 +77,53 @@ void	doSmallSort(t_stack **a_stack)
 		do_sa(a_stack, true);
 }
 
+void	doScoreCalculation_b(t_stack **b)
+{
+	//исходя из положения элемента в стеке б можно подсчитать требуемое кол-во операций
+	int		i;
+	int		size;
+	t_stack	*tmp;
+
+	i = 0;
+	tmp = *b;
+	size = CountStackElems(b);
+	while (i++ < size / 2) //rb
+	{
+		tmp->score = i;
+		tmp = tmp->next; //rrb
+	}
+	while (i-- < size)
+	{
+		tmp->score = i;
+		tmp = tmp->next;
+	}
+}
+
+void	doMainSort(t_stack *a, t_params *a_params)
+{
+	// int		size_a;
+	// int		size_b;
+	t_stack	*b;
+	t_stack	tmp;
+	
+	b = bStackInit(a, a_params);
+	doScoreCalculation_b(&b);
+	
+}
+
 void	doSort(t_stack **a)
 {
+	t_params	a_params;
+	
+	if(!doParamsCalculation(a, &a_params)) // попробовать посчитать ещё раньше
+		return ;
+	printf("min: %d, max: %d, med: %d\n\n", a_params.min, a_params.max, a_params.med);
 	if (!CheckIfSorted(a))
 	{
-		if (CountStackElems(a) <= 3)
+		if (a_params.size == 3)
 			doSmallSort(a);
-		doFinalSort(a);
+		else // cделать проверку на предварительную сортировку
+			doMainSort(*a, &a_params);
+		doFinalSort(a, &a_params);
 	}
 }

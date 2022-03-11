@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 22:00:54 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/11 01:31:54 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/11 13:10:36 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	fill_array(int *arr, int size, t_stack **stack)
 	}
 }
 
-void	free_stack(t_stack **stack)
+void	free_stack(t_stack *stack)
 {
 	t_stack	*tmp;
 
-	while (*stack)
+	while (stack)
 	{
-		tmp = *stack;
-		*stack = (*stack)->next;
+		tmp = stack;
+		stack = stack->next;
 		free(tmp);
 		tmp = NULL;
 	}

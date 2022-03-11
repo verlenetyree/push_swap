@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 02:09:02 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/11 01:34:29 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/11 15:51:30 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_stack	*StackInit(int argc, char **argv)
 	if (!argc)
 		return (NULL);
 	tmp->data = ft_atoi(*argv);
+	tmp->score = 0;
 	tmp->next = StackInit(argc - 1, argv + 1);
 	return(tmp);
 }
