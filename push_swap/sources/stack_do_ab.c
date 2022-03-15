@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   stack_do_ab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margaritasoldatkina <margaritasoldatkin    +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 04:36:08 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/09 05:33:56 by margaritaso      ###   ########.fr       */
+/*   Updated: 2022/03/10 17:19:48 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+//ss : sa and sb at the same time.
 
 void	do_ss(t_stack **a_stack, t_stack **b_stack, t_bool status)
 {
@@ -20,6 +22,8 @@ void	do_ss(t_stack **a_stack, t_stack **b_stack, t_bool status)
 		ft_putstr_fd("ss\n", 1);
 }
 
+//rr : ra and rb at the same time.
+
 void	do_rr(t_stack **a_stack, t_stack **b_stack, t_bool status)
 {
 	do_ra(a_stack, false);
@@ -27,6 +31,8 @@ void	do_rr(t_stack **a_stack, t_stack **b_stack, t_bool status)
 	if (status == true)
 		ft_putstr_fd("rr\n", 1);
 }
+
+//rrr : rra and rrb at the same time.
 
 void	do_rrr(t_stack **a_stack, t_stack **b_stack, t_bool status)
 {

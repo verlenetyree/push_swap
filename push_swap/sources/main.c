@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margaritasoldatkina <margaritasoldatkin    +#+  +:+       +#+        */
+/*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:19:12 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/09 16:36:28 by margaritaso      ###   ########.fr       */
+/*   Updated: 2022/03/13 18:23:11 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void	print_stack(t_stack *stack, char c)
 		printf("_\n%c\n\n", c);
 }
 
+void	print_stack2(t_stack *stack)
+{
+	t_stack	*tmp;
+
+	tmp = stack;
+	// printf("----------\n");
+	while (tmp)
+	{
+		printf("%d ", tmp->data);
+		tmp = tmp->next;
+	}
+		printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -53,7 +67,7 @@ int	main(int argc, char **argv)
 	{
 		if (argc == 2)
 		{
-			joinARGV = ft_strjoin(".push_swap ", argv[1]);
+			joinARGV = ft_strjoin("push_swap ", argv[1]);
 			argv = ft_split(joinARGV, ' ');
 			free(joinARGV);
 			argc = split_count(argv);
@@ -61,70 +75,17 @@ int	main(int argc, char **argv)
 		if (CheckIfValid(argc, argv) == false)
 		{
 			ft_putstr_fd("Error\n", 2);
-			if (argv[0][0] == '.')
+			if (argv[0][0] == 'p')
 				free_array(argv);
 			return (-1);
 		}
+
 		a = StackInit(argc - 1, argv + 1);
-		DoSort(a);
-
-		///////////////////////////////////
-		// SA
-		print_stack(a, 'a');
-
-		do_sa(&a, false);
-		printf("sa has done:\n\n");
-		print_stack(a, 'a');
-
-		///////////////////////////////////
-		// PA
-		t_stack *b;
-
-		b = init_b();
-		print_stack(b, 'b');
-
-		printf("pa has done:\n\n");
-
-		do_pa(&a, &b, false);
-		print_stack(a, 'a');
-		print_stack(b, 'b');
-
-		///////////////////////////////////
-		// SB
-		do_sb(&b, false);
-		printf("sb has done:\n\n");
-		print_stack(b, 'b');
-
-		///////////////////////////////////
-		// PB
-		do_pb(&a, &b, false);
-		printf("pb has done:\n\n");
-		print_stack(a, 'a');
-		print_stack(b, 'b');
-
-		///////////////////////////////////
-		// RA
-		do_ra(&a, false);
-		printf("ra has done:\n\n");
-		print_stack(a, 'a');
-
-		///////////////////////////////////
-		// RRA
-		do_rra(&a, false);
-		printf("rra has done:\n\n");
-		print_stack(a, 'a');
-
-		///////////////////////////////////
-		// RB
-		do_rb(&b, false);
-		printf("rb has done:\n\n");
-		print_stack(b, 'b');
-
-		///////////////////////////////////
-		// RRB
-		do_rra(&b, false);
-		printf("rrb has done:\n\n");
-		print_stack(b, 'b');
+		doSort(&a);
+		//print_stack2(a);
+		free_stack(a);
+		if (argv[0][0] == 'p')
+			free_array(argv);
 	}
 	return (0);
 }
