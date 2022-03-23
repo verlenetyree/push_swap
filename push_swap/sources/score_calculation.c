@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:45:43 by vtyree            #+#    #+#             */
-/*   Updated: 2022/03/18 16:31:17 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/23 20:15:49 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_a_score(int i, int size)
 {
-	int a_score;
+	int	a_score;
 
 	if (i < size - i)
 		a_score = i;
@@ -40,7 +40,7 @@ void	doScoreCalculation_a(t_stack **a, t_stack **b, t_params *params)
 		last_a = GetStackLastElement(a)->data;
 		while (head_a)
 		{
-			if(tmp_b->data < head_a->data && tmp_b->data > last_a) //ra
+			if (tmp_b->data < head_a->data && tmp_b->data > last_a)
 				tmp_b->a_score = get_a_score(i, size);
 			i++;
 			last_a = head_a->data;
@@ -60,7 +60,7 @@ void	doScoreCalculation_b(t_stack **b, t_params *params)
 	i = 0;
 	tmp = *b;
 	size = params->b_size;
-	while (i < size / 2) //rb
+	while (i < size / 2)
 	{
 		tmp->b_score = i++;
 		tmp = tmp->next;
@@ -68,9 +68,9 @@ void	doScoreCalculation_b(t_stack **b, t_params *params)
 	j = i;
 	if (size % 2 != 0)
 		i++;
-	while (j++ < size) //rrb
+	while (j++ < size)
 	{
-		tmp->b_score = i-- * -1;
+		tmp->b_score = -1 * i--;
 		tmp = tmp->next;
 	}
 }

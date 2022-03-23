@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 15:55:23 by admin             #+#    #+#             */
-/*   Updated: 2022/03/18 20:18:52 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/23 20:20:50 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_stack	*bStackInit(t_stack **a, t_params *params)
 		else
 		{
 			do_pb(a, &b, true);
-				if (b->data > params->med)
-					do_rb(&b, true);
+			if (b->data > params->med)
+				do_rb(&b, true);
 			size--;
 		}
 	}
@@ -44,36 +44,49 @@ t_stack	*GetStackLastElement(t_stack **stack)
 	t_stack	*tmp;
 
 	tmp = *stack;
-	while(tmp->next)
+	while (tmp->next)
 	{
 		tmp = tmp->next;
 	}
 	return (tmp);
 }
 
-t_bool	CheckIfPresorted(t_stack **a, t_params *params)
+void	doThreeSort(t_stack **stack)
 {
-	t_stack	*tmp;
-	t_stack	*tmp_next;
+	int	a;
+	int	b;
+	int	c;
 
-	tmp = *a;
-	tmp_next = tmp->next;
-	while(tmp->next)
+	a = (*stack)->data;
+	b = (*stack)->next->data;
+	c = (*stack)->next->next->data;
+	if (a > b && b > c)
+		do_sa(stack, true);
+	if (c > a && a > b)
+		do_sa(stack, true);
+	if (c > a && b > c)
+		do_sa(stack, true);
+}
+
+void	doCompleteSort(t_stack **a_stack, t_stack **b_stack, t_params *params)
+{
+	t_params	fake_param;
+
+	doThreeSort(a_stack);
+	if (!CheckIfSorted(a_stack))
 	{
-		if (tmp->data < tmp_next->data)
+		doParamsCalculation(a_stack, &fake_param);
+		doFinalSort(a_stack, &fake_param);
+	}
+	while (params->b_size)
+	{
+		if ((*b_stack)->data == params->max)
 		{
-			tmp = tmp->next;
-			tmp_next = tmp->next;
-		}
-		else if (tmp_next->data == params->min)
-		{
-			tmp_next = tmp_next->next;
-			if (tmp_next->data > tmp->data)
-				return (false);
-			tmp = tmp->next;
+			do_pa(a_stack, b_stack, true);
+			do_ra(a_stack, true);
 		}
 		else
-			return (false);
+			do_pa(a_stack, b_stack, true);
+		params->b_size--;
 	}
-	return (true);
 }

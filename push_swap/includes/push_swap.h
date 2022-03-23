@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 19:34:08 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/18 20:19:07 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/23 20:14:26 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,11 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
-
 typedef enum bool
 {
 	false,
 	true
 }	t_bool;
-
-typedef enum ids
-{
-	none,
-	sa,
-	sb,
-	ss,
-	pa,
-	pb,
-	ra,
-	rb,
-	rr,
-	rra,
-	rrb,
-	rrr
-}	t_ids;
 
 typedef struct s_stack
 {
@@ -71,12 +54,11 @@ void	fill_array(int *arr, int size, t_stack **stack);
 void	free_stack(t_stack *stack);
 
 //stack utils
-t_bool 	CheckIfValid(int argc, char **argv);
+t_bool	CheckIfValid(int argc, char **argv);
 t_stack	*StackInit(int argc, char **argv);
 t_stack	*bStackInit(t_stack **a, t_params *params);
 int		CountStackElems(t_stack **stack);
 t_bool	CheckIfSorted(t_stack **stack);
-t_bool	CheckIfPresorted(t_stack **a, t_params *params);
 t_stack	*GetStackLastElement(t_stack **stack);
 
 //operations
@@ -98,6 +80,7 @@ void	do_rrr(t_stack **a_stack, t_stack **b_stack, t_bool status);
 void	doSort(t_stack **a_stack);
 void	doThreeSort(t_stack **stack);
 void	doSmallSort(t_stack **a_stack, t_params *params);
+void	doCompleteSort(t_stack **a_stack, t_stack **b_stack, t_params *params);
 void	doMainSort(t_stack **a, t_params *params);
 void	doFinalSort(t_stack **a_stack, t_params *params);
 
@@ -108,8 +91,5 @@ void	doProcessing(t_stack **a, t_stack **b, t_params *params);
 
 //quick sort
 void	doQuickSort(int *arr, int low, int high);
-
-//stuff to delete
-void	print_stack2(t_stack *stack);
 
 #endif

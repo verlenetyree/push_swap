@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: margaritasoldatkina <margaritasoldatkin    +#+  +:+       +#+        */
+/*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:49:35 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/09 02:46:14 by margaritaso      ###   ########.fr       */
+/*   Updated: 2022/03/23 20:32:02 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static t_bool CheckIfUnique(int argc, char **argv)
+static t_bool	CheckIfUnique(int argc, char **argv, int *arr)
 {
-	int	*arr;
 	int	i;
 	int	j;
 
@@ -34,7 +33,7 @@ static t_bool CheckIfUnique(int argc, char **argv)
 			if (arr[i] == arr[j])
 			{
 				free (arr);
-				return(false);
+				return (false);
 			}
 		}
 	}
@@ -42,9 +41,9 @@ static t_bool CheckIfUnique(int argc, char **argv)
 	return (true);
 }
 
-static t_bool CheckIfInteger(char *elem)
+static t_bool	CheckIfInteger(char *elem)
 {
-	int64_t n;
+	int64_t	n;
 
 	n = ft_atoi(elem);
 	if (n > INT_MAX || n < INT_MIN)
@@ -52,35 +51,36 @@ static t_bool CheckIfInteger(char *elem)
 	return (true);
 }
 
-
-static t_bool CheckIfDigit(char *elem)
+static t_bool	CheckIfDigit(char *elem)
 {
-	while(*elem)
+	while (*elem)
 	{
 		if (*elem == '+' || *elem == '-')
 			elem++;
-		while(*elem)
+		while (*elem)
 		{
 			if (!ft_isdigit(*elem))
-				return(false);
+				return (false);
 			elem++;
 		}
 	}
 	return (true);
 }
 
-t_bool CheckIfValid(int argc, char **argv)
+t_bool	CheckIfValid(int argc, char **argv)
 {
 	int		i;
+	int		*arr;
 
 	i = 1;
 	while (i < argc)
 	{
 		if (CheckIfDigit(argv[i]) == false)
-			return(false);
+			return (false);
 		if (CheckIfInteger(argv[i]) == false)
-			return(false);
-		i++;
+			return (false);
+		if (CheckIfUnique(argc, argv[i], arr) == false)
+			return (false);
 	}
-	return (CheckIfUnique(argc, argv));
+	return (true);
 }

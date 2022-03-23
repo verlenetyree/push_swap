@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 02:09:02 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/11 15:51:30 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/23 20:19:29 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,24 @@ static int	partition(int *arr, int low, int high)
 	j = low;
 	while (j < high)
 	{
-    	if (arr[j] <= pivot) 
+		if (arr[j] <= pivot)
 		{
 			i++;
 			ft_swap(&arr[i], &arr[j]);
 		}
 		j++;
 	}
-    ft_swap(&arr[i + 1], &arr[high]);
-	return(i + 1);
+	ft_swap(&arr[i + 1], &arr[high]);
+	return (i + 1);
 }
 
 void	doQuickSort(int *arr, int low, int high)
 {
 	int	pivot;
+
 	if (low < high)
 	{
-		pivot =  partition(arr, low, high);
+		pivot = partition(arr, low, high);
 		doQuickSort(arr, low, pivot - 1);
 		doQuickSort(arr, pivot + 1, high);
 	}
@@ -48,15 +49,15 @@ void	doQuickSort(int *arr, int low, int high)
 t_bool	CheckIfSorted(t_stack **stack)
 {
 	t_stack	*tmp;
-	
+
 	tmp = *stack;
-	while(tmp->next)
+	while (tmp->next)
 	{
 		if (tmp->data > tmp->next->data)
-			return(false);
+			return (false);
 		tmp = tmp->next;
 	}
-	return(true);
+	return (true);
 }
 
 int	CountStackElems(t_stack **stack)
@@ -66,13 +67,13 @@ int	CountStackElems(t_stack **stack)
 
 	i = 1;
 	tmp = *stack;
-	while(tmp->next)
+	while (tmp->next)
 	{
 		tmp = tmp->next;
 		i++;
 	}
-	return(i);
-} 
+	return (i);
+}
 
 t_stack	*StackInit(int argc, char **argv)
 {
@@ -84,5 +85,5 @@ t_stack	*StackInit(int argc, char **argv)
 	tmp->data = ft_atoi(*argv);
 	tmp->score = 0;
 	tmp->next = StackInit(argc - 1, argv + 1);
-	return(tmp);
+	return (tmp);
 }

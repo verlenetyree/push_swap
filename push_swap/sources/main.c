@@ -6,38 +6,11 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:19:12 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/18 20:16:49 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/23 20:13:38 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	print_stack(t_stack *stack, char c)
-{
-	t_stack	*tmp;
-
-	tmp = stack;
-	while (tmp)
-	{
-		printf("%d\n", tmp->data);
-		tmp = tmp->next;
-	}
-		printf("_\n%c\n\n", c);
-}
-
-void	print_stack2(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	tmp = stack;
-	// printf("----------\n");
-	while (tmp)
-	{
-		printf("%d ", tmp->data);
-		tmp = tmp->next;
-	}
-		printf("\n");
-}
 
 int	main(int argc, char **argv)
 {
@@ -60,14 +33,11 @@ int	main(int argc, char **argv)
 				free_array(argv);
 			return (-1);
 		}
-
 		a = StackInit(argc - 1, argv + 1);
 		doSort(&a);
-		//print_stack2(a);
 		free_stack(a);
 		if (argv[0][0] == 'p')
 			free_array(argv);
-		//printf("%d", 1 / 2);
 	}
 	return (0);
 }
