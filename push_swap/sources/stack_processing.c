@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:30:54 by vtyree            #+#    #+#             */
-/*   Updated: 2022/03/12 21:42:23 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/18 20:16:04 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static void	processMixed(t_stack **a, t_stack **b, t_stack *elem)
 	{
 		if (elem->b_score > 0)
 		{
-			do_ra(b, true);
+			do_rb(b, true);
 			elem->b_score--;
 		}
 		if (elem->b_score < 0)
 		{
-			do_rra(b, true);
+			do_rrb(b, true);
 			elem->b_score++;
 		}
 	}
@@ -44,24 +44,30 @@ static void	processMixed(t_stack **a, t_stack **b, t_stack *elem)
 
 static void	processNegative(t_stack **a, t_stack **b, t_stack *elem)
 {
-	while (elem->a_score++ && elem->b_score++)
+	while (elem->a_score < 0 && elem->b_score < 0)
+	{
 			do_rrr(a, b, true);
-		while (elem->a_score++)
-			do_rra(a, true);
-		while (elem->b_score++)
-			do_rrb(b, true);
-		do_pa(a, b, true);
+			elem->a_score++;
+			elem->b_score++;
+	}
+	while (elem->a_score++ < 0)
+		do_rra(a, true);
+	while (elem->b_score++ < 0)
+		do_rrb(b, true);
 }
 
 static void	processPositive(t_stack **a, t_stack **b, t_stack *elem)
 {
-	while (elem->a_score-- && elem->b_score--)
+	while (elem->a_score > 0 && elem->b_score > 0)
+	{
 			do_rr(a, b, true);
-		while (elem->a_score--)
-			do_ra(a, true);
-		while (elem->b_score--)
-			do_rb(b, true);
-		do_pa(a, b, true);
+			elem->a_score--;
+			elem->b_score--;
+	}
+	while (elem->a_score-- > 0)
+		do_ra(a, true);
+	while (elem->b_score-- > 0)
+		do_rb(b, true);
 }
 
 void	doProcessing(t_stack **a, t_stack **b, t_params *params)

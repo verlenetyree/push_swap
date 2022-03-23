@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:45:43 by vtyree            #+#    #+#             */
-/*   Updated: 2022/03/12 21:55:35 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/18 16:31:17 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	doScoreCalculation_b(t_stack **b, t_params *params)
 	i = 0;
 	tmp = *b;
 	size = params->b_size;
-	if (size % 2 != 0 && size != 1)
-		size = params->b_size - 1;
 	while (i < size / 2) //rb
 	{
 		tmp->b_score = i++;
 		tmp = tmp->next;
 	}
 	j = i;
+	if (size % 2 != 0)
+		i++;
 	while (j++ < size) //rrb
 	{
 		tmp->b_score = i-- * -1;

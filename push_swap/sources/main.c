@@ -6,30 +6,11 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:19:12 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/13 18:23:11 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/18 20:16:49 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-t_stack	*init_b()
-{
-	int		i = 0;
-	char	**arr;
-
-	arr = (char **)malloc(sizeof(char *) * 3);
-	while (i < 5)
-	{
-		arr[i] = (char *)malloc(sizeof(char) * 2);
-		i++;
-	}
-	arr[0] = "10";
-	arr[1] = "20";
-	arr[2] = "30";
-	arr[3] = "40";
-	arr[4] = "50";
-	return(StackInit(5, arr));
-}
 
 void	print_stack(t_stack *stack, char c)
 {
@@ -86,6 +67,7 @@ int	main(int argc, char **argv)
 		free_stack(a);
 		if (argv[0][0] == 'p')
 			free_array(argv);
+		//printf("%d", 1 / 2);
 	}
 	return (0);
 }

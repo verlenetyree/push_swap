@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 19:34:08 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/13 16:14:21 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/18 20:19:07 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	do_rrr(t_stack **a_stack, t_stack **b_stack, t_bool status);
 
 //sort
 void	doSort(t_stack **a_stack);
-void	doSmallSort(t_stack **a);
+void	doThreeSort(t_stack **stack);
+void	doSmallSort(t_stack **a_stack, t_params *params);
 void	doMainSort(t_stack **a, t_params *params);
 void	doFinalSort(t_stack **a_stack, t_params *params);
 

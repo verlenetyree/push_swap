@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 15:55:23 by admin             #+#    #+#             */
-/*   Updated: 2022/03/13 17:18:56 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/18 20:18:52 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_stack	*bStackInit(t_stack **a, t_params *params)
 		}
 	}
 	params->a_size = 3;
-	doSmallSort(a);
+	doThreeSort(a);
 	doFinalSort(a, params);
 	return (b);
 }
