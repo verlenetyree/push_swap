@@ -6,11 +6,17 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:19:12 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/23 20:13:38 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/25 16:26:32 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	free_argv(char **argv)
+{
+	if (argv[0][0] == 'p')
+		free_array(argv);
+}
 
 int	main(int argc, char **argv)
 {
@@ -35,9 +41,8 @@ int	main(int argc, char **argv)
 		}
 		a = StackInit(argc - 1, argv + 1);
 		doSort(&a);
-		free_stack(a);
-		if (argv[0][0] == 'p')
-			free_array(argv);
+		free_stack(&a);
+		free_argv(argv);
 	}
 	return (0);
 }

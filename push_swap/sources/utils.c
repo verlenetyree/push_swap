@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 22:00:54 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/11 13:10:36 by admin            ###   ########.fr       */
+/*   Updated: 2022/03/25 16:02:29 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@ void	fill_array(int *arr, int size, t_stack **stack)
 	}
 }
 
-void	free_stack(t_stack *stack)
+void	free_stack(t_stack **stack)
 {
 	t_stack	*tmp;
+	t_stack	*rem;
 
-	while (stack)
+	tmp = *stack;
+	while (tmp)
 	{
-		tmp = stack;
-		stack = stack->next;
-		free(tmp);
-		tmp = NULL;
+		rem = tmp;
+		tmp = tmp->next;
+		free(rem);
 	}
+	*stack = NULL;
 }
 
 void	free_array(char **arr)

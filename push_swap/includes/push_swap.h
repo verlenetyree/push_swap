@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 19:34:08 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/23 20:14:26 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/25 15:21:01 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_params
 int		split_count(char **arr);
 void	free_array(char **arr);
 void	fill_array(int *arr, int size, t_stack **stack);
-void	free_stack(t_stack *stack);
+void	free_stack(t_stack **stack);
 
 //stack utils
 t_bool	CheckIfValid(int argc, char **argv);

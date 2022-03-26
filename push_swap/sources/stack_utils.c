@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 02:09:02 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/23 20:19:29 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/25 16:25:13 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ t_stack	*StackInit(int argc, char **argv)
 {
 	t_stack	*tmp;
 
-	tmp = malloc(sizeof(t_stack));
 	if (!argc)
 		return (NULL);
+	tmp = (t_stack *)malloc(sizeof(t_stack));
 	tmp->data = ft_atoi(*argv);
 	tmp->score = 0;
 	tmp->next = StackInit(argc - 1, argv + 1);

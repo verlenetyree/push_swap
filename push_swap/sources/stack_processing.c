@@ -6,27 +6,14 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:30:54 by vtyree            #+#    #+#             */
-/*   Updated: 2022/03/23 20:18:38 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/25 14:56:32 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	processMixed(t_stack **a, t_stack **b, t_stack *elem)
+static void	processBScore(t_stack **b, t_stack *elem)
 {
-	while (elem->a_score)
-	{
-		if (elem->a_score > 0)
-		{
-			do_ra(a, true);
-			elem->a_score--;
-		}
-		if (elem->a_score < 0)
-		{
-			do_rra(a, true);
-			elem->a_score++;
-		}
-	}
 	while (elem->b_score)
 	{
 		if (elem->b_score > 0)
@@ -39,6 +26,20 @@ static void	processMixed(t_stack **a, t_stack **b, t_stack *elem)
 			do_rrb(b, true);
 			elem->b_score++;
 		}
+	}
+}
+
+static void	processAScore(t_stack **a, t_stack *elem)
+{
+	if (elem->a_score > 0)
+	{
+		do_ra(a, true);
+		elem->a_score--;
+	}
+	if (elem->a_score < 0)
+	{
+		do_rra(a, true);
+		elem->a_score++;
 	}
 }
 
@@ -88,7 +89,12 @@ void	doProcessing(t_stack **a, t_stack **b, t_params *params)
 	else if (min->a_score < 0 && min->b_score < 0)
 		processNegative(a, b, min);
 	else
-		processMixed(a, b, min);
+	{
+		while (min->a_score)
+			processAScore(a, min);
+		while (min->b_score)
+			processBScore(b, min);
+	}
 	do_pa(a, b, true);
 	params->a_size++;
 	params->b_size--;

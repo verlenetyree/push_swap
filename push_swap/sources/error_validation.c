@@ -6,7 +6,7 @@
 /*   By: vtyree <vtyree@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:49:35 by margaritaso       #+#    #+#             */
-/*   Updated: 2022/03/23 20:32:02 by vtyree           ###   ########.fr       */
+/*   Updated: 2022/03/25 16:26:30 by vtyree           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ static t_bool	CheckIfUnique(int argc, char **argv, int *arr)
 	int	i;
 	int	j;
 
-	arr = (int *)malloc(sizeof(int) * (argc - 1));
-	if (arr == NULL)
-		return (false);
 	i = -1;
 	while (++i < argc - 1)
 		arr[i] = ft_atoi(argv[i + 1]);
@@ -79,8 +76,10 @@ t_bool	CheckIfValid(int argc, char **argv)
 			return (false);
 		if (CheckIfInteger(argv[i]) == false)
 			return (false);
-		if (CheckIfUnique(argc, argv[i], arr) == false)
-			return (false);
+		i++;
 	}
-	return (true);
+	arr = (int *)malloc(sizeof(int) * (argc - 1));
+	if (arr == NULL)
+		return (false);
+	return (CheckIfUnique(argc, argv, arr));
 }
